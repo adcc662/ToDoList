@@ -1,12 +1,13 @@
 import json
 import pytest
-from django.test import TestCase
-from strawberry.django.test import GraphQLTestClient
-from todo.urls import schema
+from django.test import TestCase, Client
+from django.urls import reverse
 from todolist.models import Task
 
 
 class TaskGraphQLTests(TestCase):
+    GRAPHQL_URL = "/graphql/"
+    
     def setUp(self):
         """Configuración inicial para las pruebas"""
         self.task1 = Task.objects.create(
@@ -19,7 +20,7 @@ class TaskGraphQLTests(TestCase):
             description="Second GraphQL test task", 
             completed=True
         )
-        self.client = GraphQLTestClient(schema)
+        self.client = Client()
     
     def test_query_all_tasks(self):
         """Test para obtener todas las tareas vía GraphQL"""
@@ -33,7 +34,13 @@ class TaskGraphQLTests(TestCase):
             }
         }
         """
-        response = self.client.query(query)
+        response = self.client.post(
+            self.GRAPHQL_URL,
+            data={"query": query},
+            content_type="application/json"
+        )
+        
+        self.assertEqual(response.status_code, 200)
         content = json.loads(response.content)
         
         self.assertIn("data", content)
@@ -51,7 +58,13 @@ class TaskGraphQLTests(TestCase):
             }}
         }}
         """
-        response = self.client.query(query)
+        response = self.client.post(
+            self.GRAPHQL_URL,
+            data={"query": query},
+            content_type="application/json"
+        )
+        
+        self.assertEqual(response.status_code, 200)
         content = json.loads(response.content)
         
         self.assertIn("data", content)
@@ -73,7 +86,13 @@ class TaskGraphQLTests(TestCase):
             }
         }
         """
-        response = self.client.query(mutation)
+        response = self.client.post(
+            self.GRAPHQL_URL,
+            data={"query": mutation},
+            content_type="application/json"
+        )
+        
+        self.assertEqual(response.status_code, 200)
         content = json.loads(response.content)
         
         self.assertIn("data", content)
@@ -96,7 +115,13 @@ class TaskGraphQLTests(TestCase):
             }}
         }}
         """
-        response = self.client.query(mutation)
+        response = self.client.post(
+            self.GRAPHQL_URL,
+            data={"query": mutation},
+            content_type="application/json"
+        )
+        
+        self.assertEqual(response.status_code, 200)
         content = json.loads(response.content)
         
         self.assertIn("data", content)
@@ -115,7 +140,13 @@ class TaskGraphQLTests(TestCase):
             deleteTask(id: {self.task1.id})
         }}
         """
-        response = self.client.query(mutation)
+        response = self.client.post(
+            self.GRAPHQL_URL,
+            data={"query": mutation},
+            content_type="application/json"
+        )
+        
+        self.assertEqual(response.status_code, 200)
         content = json.loads(response.content)
         
         self.assertIn("data", content)
