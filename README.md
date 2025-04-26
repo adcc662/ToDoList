@@ -73,6 +73,7 @@ docker-compose up -d --build
 
 4. Ejecutar las migraciones:
 ```
+docker-compose exec web python manage.py makemigrations todolist
 docker-compose exec web python manage.py migrate
 ```
 
@@ -189,4 +190,21 @@ mutation {
 mutation {
   deleteTask(id: 1)
 }
+```
+
+## Ejecutar pruebas
+
+Para ejecutar las pruebas del proyecto:
+
+```bash
+# Ejecutar todos los tests
+docker-compose exec web pytest
+
+# Ejecutar tests con salida detallada
+docker-compose exec web pytest -v
+
+# Ejecutar tests específicos
+docker-compose exec web pytest todolist/tests/test_models.py
+docker-compose exec web pytest todolist/tests/test_api.py
+docker-compose exec web pytest todolist/tests/test_graphql.py
 ```
