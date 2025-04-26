@@ -1,0 +1,12 @@
+Django>=4.2.0,<5.0.0
+djangorestframework>=3.14.0,<4.0.0
+psycopg2-binary>=2.9.5,<3.0.0
+uvicorn>=0.23.0,<1.0.0
+python-dotenv>=1.0.0,<2.0.0
+strawberry-graphql>=0.211.1,<1.0.0
+drf-yasg>=1.21.7,<2.0.0
+pytest>=7.3.1,<8.0.0
+pytest-django>=4.5.2,<5.0.0
+flake8>=6.0.0,<7.0.0
+black>=23.3.0,<24.0.0
+django-cors-headers>=4.0.0,<5.0.0
