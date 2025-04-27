@@ -68,18 +68,18 @@ cp .env.example .env
 
 3. Construir y levantar los contenedores:
 ```
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 4. Ejecutar las migraciones:
 ```
-docker-compose exec web python manage.py makemigrations todolist
-docker-compose exec web python manage.py migrate
+docker compose exec web python manage.py makemigrations todolist
+docker compose exec web python manage.py migrate
 ```
 
 5. Crear un superusuario (opcional):
 ```
-docker-compose exec web python manage.py createsuperuser
+docker compose exec web python manage.py createsuperuser
 ```
 
 6. Acceder a la API:
@@ -198,13 +198,13 @@ Para ejecutar las pruebas del proyecto:
 
 ```bash
 # Ejecutar todos los tests
-docker-compose exec web pytest
+docker compose exec web pytest
 
 # Ejecutar tests con salida detallada
-docker-compose exec web pytest -v
+docker compose exec web pytest -v
 
 # Ejecutar tests específicos
-docker-compose exec web pytest todolist/tests/test_models.py
-docker-compose exec web pytest todolist/tests/test_api.py
-docker-compose exec web pytest todolist/tests/test_graphql.py
+docker compose exec web pytest todolist/tests/test_models.py
+docker compose exec web pytest todolist/tests/test_api.py
+docker compose exec web pytest todolist/tests/test_graphql.py
 ```
