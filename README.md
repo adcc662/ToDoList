@@ -58,7 +58,7 @@ todo/                      # Proyecto principal de Django
 1. Clonar el repositorio:
 ```
 git clone <repo-url>
-cd todo
+cd ToDoList
 ```
 
 2. Crear archivo .env a partir de .env.example:
